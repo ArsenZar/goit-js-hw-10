@@ -8,3 +8,4 @@ setTimeout(() => {
 
 // Виконується другою
 console.log("Third log");
+
