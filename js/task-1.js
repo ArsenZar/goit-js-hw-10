@@ -1,4 +1,12 @@
-const date = new Date();
+const startTime = Date.now();
 
-console.log(date);
-// "Fri Jun 18 2021 15:01:35 GMT+0300 (Eastern European Summer Time)"
+// Твій код, виконуваний упродовж деякого часу
+for(let i = 0; i <= 100; i += 1) {
+	console.log(i);
+}
+
+const endTime = Date.now();
+const elapsedTime = endTime - startTime;
+
+console.log(`Elapsed time: ${elapsedTime} ms`);
+
