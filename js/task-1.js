@@ -1,10 +1,14 @@
 let timerId = null;
 
+let timerCount = 0;
+let timerP = document.querySelector("#time");
+
 document.querySelector("#start").addEventListener("click", () => {
   // Створюємо таймер і зберігаємо його ID
-  timerId = setTimeout(() => {
-    console.log("⏰ Таймер спрацював!");
-  }, 3000);
+  timerId = setInterval(() => {
+      timerCount++;
+      timerP.textContent = timerCount;
+  }, 1000);
   console.log("🚀 Таймер запущено:", timerId);
 });
 
