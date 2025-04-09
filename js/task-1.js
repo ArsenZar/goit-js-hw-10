@@ -1,11 +1,15 @@
-// Виконується першою
-console.log("First log");
+let timerId = null;
 
-setTimeout(() => {
-	// Виконується третьою, через 2000 мілісекунд (2 секунди)
-  console.log("Second log");
-}, 2000);
+document.querySelector("#start").addEventListener("click", () => {
+  // Створюємо таймер і зберігаємо його ID
+  timerId = setTimeout(() => {
+    console.log("⏰ Таймер спрацював!");
+  }, 3000);
+  console.log("🚀 Таймер запущено:", timerId);
+});
 
-// Виконується другою
-console.log("Third log");
-
+document.querySelector("#stop").addEventListener("click", () => {
+  // Якщо таймер існує — скасовуємо
+  clearTimeout(timerId);
+  console.log("🛑 Таймер скасовано:", timerId);
+});
