@@ -24,16 +24,13 @@ const promise = new Promise((resolve, reject) => {
 */
 
 // Registering promise callbacks
-promise.then(
-    value => {
-        console.log(promise);
-    //console.log(value); // "Success! Value passed to resolve function"
-  },
-    error => {
-      console.log(promise);
-   // console.log(error); // "Error! Error passed to reject function"
-  }
-);
+promise
+    .then(value => {
+        console.log(value); // "Success! Value passed to resolve function"
+    })
+    .catch(error => {
+        console.log(error);
+  });;
 
 /*
 А then(...) — обробник результату:
