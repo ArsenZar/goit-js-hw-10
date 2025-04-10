@@ -1,24 +1,20 @@
-const promise = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(5);
-  }, 2000);
-});
+const fetchUserFromServer = (username, onSuccess, onError) => {
+  console.log(`Fetching data for ${username}`);
 
-promise
-  .then(value => {
-    console.log(value); // 5
-    return value * 2;
-  })
-  .then(value => {
-    console.log(value); // 10
-    return value * 3;
-  })
-  .then(value => {
-    console.log(value); // 30
-  })
-  .catch(error => {
-    console.log(error);
-  })
-  .finally(() => {
-    console.log("finally");
-  });
+  setTimeout(() => {
+    // Change value of isSuccess variable to simulate request status
+    const isSuccess = true;
+
+    if (isSuccess) {
+      onSuccess("success value");
+    } else {
+      onError("error");
+    }
+  }, 2000);
+};
+
+fetchUserFromServer(
+	"Mango", 
+	user => console.log(user), 
+	error => console.error(error)
+);
