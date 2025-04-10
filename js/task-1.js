@@ -1,21 +1,24 @@
-const isSuccess = true;
-
-// Create promise
 const promise = new Promise((resolve, reject) => {
   setTimeout(() => {
-    if (isSuccess) {
-      resolve("Success! Value passed to resolve function");
-    } else {
-      reject("Error! Error passed to reject function");
-    }
+    resolve(5);
   }, 2000);
 });
 
-// Registering promise callbacks
 promise
   .then(value => {
-    console.log(value); // "Success! Value passed to resolve function"
+    console.log(value); // 5
+    return value * 2;
+  })
+  .then(value => {
+    console.log(value); // 10
+    return value * 3;
+  })
+  .then(value => {
+    console.log(value); // 30
   })
   .catch(error => {
-    console.log(error); // "Error! Error passed to reject function"
+    console.log(error);
+  })
+  .finally(() => {
+    console.log("finally");
   });
