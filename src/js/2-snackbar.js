@@ -1,57 +1,23 @@
-// let ourResoult = true;
-// let listClient = {
-//     name: "Alex",
-//     sureName: "Green"
-// }
-
-// console.log(listClient.sureName);
-
-
-// const promice = new Promise((ready, problem) => {
-//     setTimeout(() => { 
-//         if (ourResoult) {
-//             ready(["all good", 5]);
-//         } else {
-//             problem("problem");
-//         }
-//     }, 2000);
-//  });
-
-// promice
-//     .then(value => {
-//         return [ value[0], value[1] * 2 ];
-//     })
-//     .then((value) => { 
-//         console.log(value);
-//         return [value[0], value[1] + 3];
-//     })
-//     .then((value) => {
-//         console.log(value);
-//     })
-//     .catch(error => {
-//         console.log("OGO, tut error");
-//     })
-//     .finally(
-//         () => { console.log(`finaly here`) }
-//     );
-
-const fetchUserFromServer = username => {
+const makePromise = ({ value, delay, shouldResolve = true }) => {
     return new Promise((resolve, reject) => {
-        console.log(`Fetching data for ${username}`);
-
         setTimeout(() => {
-            // Change value of isSuccess variable to simulate request status
-            const isSuccess = true;
-
-            if (isSuccess) {
-                resolve("success value");  // значенням параметра resolve буде колбек-функція методу then()
+            if (shouldResolve) {
+                resolve(value)
             } else {
-                reject("error");  // значенням параметра reject буде колбек-функція методу catch()
+                reject(value)
             }
-        }, 2000);
+        }, delay);
     });
 };
 
-fetchUserFromServer("Mango")
-    .then(user => console.log(user))
-    .catch(error => console.error(error));
+makePromise({ value: "A", delay: 1000 })
+    .then(value => console.log(value)) // "A"
+    .catch(error => console.log(error));
+
+makePromise({ value: "B", delay: 3000 })
+    .then(value => console.log(value)) // "B"
+    .catch(error => console.log(error));
+
+makePromise({ value: "C", delay: 2000, shouldResolve: false })
+    .then(value => console.log(value))
+    .catch(error => console.log(error)); // "C"
