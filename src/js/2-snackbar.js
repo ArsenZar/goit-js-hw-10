@@ -1,23 +1,38 @@
-const makePromise = ({ value, delay, shouldResolve = true }) => {
+// Описаний у документації
+import iziToast from "izitoast";
+// Додатковий імпорт стилів
+import "izitoast/dist/css/iziToast.min.css";
+
+const buttonStart = document.querySelector('[data-start]');
+
+const makePromise = ({ delay, shouldResolve }) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            if (shouldResolve) {
-                resolve(value)
-            } else {
-                reject(value)
-            }
+            shouldResolve == "fulfilled" ? resolve(delay) : reject(delay);
         }, delay);
     });
 };
 
-makePromise({ value: "A", delay: 1000 })
-    .then(value => console.log(value)) // "A"
-    .catch(error => console.log(error));
+buttonStart.addEventListener("click", (e) => {
+    e.preventDefault();
 
-makePromise({ value: "B", delay: 3000 })
-    .then(value => console.log(value)) // "B"
-    .catch(error => console.log(error));
+    const takeMs = Number(document.querySelector('[data-delay]').value);
+    const takeState = document.querySelector('input[name="state"]:checked');
 
-makePromise({ value: "C", delay: 2000, shouldResolve: false })
-    .then(value => console.log(value))
-    .catch(error => console.log(error)); // "C"
+    console.log(takeState.value);
+
+    makePromise({ delay: takeMs, shouldResolve: takeState.value })
+        .then(delay => {
+            iziToast.success({
+                message: `✅ Fulfilled promise in ${delay}ms`,
+                position: 'topRight',
+            });
+        }) // "A"
+        .catch(delay => {
+            iziToast.error({
+                message: `❌ Rejected promise in ${delay}ms`,
+                position: 'topRight',
+            });
+            
+        });
+});
