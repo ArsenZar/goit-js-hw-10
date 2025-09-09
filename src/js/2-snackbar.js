@@ -3,7 +3,7 @@ import iziToast from "izitoast";
 // Додатковий імпорт стилів
 import "izitoast/dist/css/iziToast.min.css";
 
-const buttonStart = document.querySelector('[data-start]');
+const form = document.querySelector('.form');
 
 const makePromise = ({ delay, shouldResolve }) => {
   return new Promise((resolve, reject) => {
@@ -13,7 +13,7 @@ const makePromise = ({ delay, shouldResolve }) => {
   });
 };
 
-buttonStart.addEventListener("click", (e) => {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const takeMs = Number(document.querySelector('[data-delay]').value);
